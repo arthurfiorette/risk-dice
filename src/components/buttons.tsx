@@ -32,9 +32,9 @@ export function ArrowButton({ side, direction, disabled }: ButtonsProps) {
         'text-white w-16 h-10 flex items-center justify-center focus:outline-none',
         disabled && 'disabled:invisible',
         direction === Direction.Up ? 'rounded-t-lg' : 'rounded-b-lg',
-        side === Sides.Attack ? 'bg-red-600' : 'bg-blue-600',
-        side === Sides.Attack ? 'hover:bg-red-700' : 'hover:bg-blue-700',
-        side === Sides.Attack ? 'active:bg-red-800' : 'active:bg-blue-800'
+        side === Sides.Attack ? 'bg-red-600' : 'bg-yellow-600',
+        side === Sides.Attack ? 'hover:bg-red-700' : 'hover:bg-yellow-700',
+        side === Sides.Attack ? 'active:bg-red-800' : 'active:bg-yellow-800'
       )}>
       {direction === Direction.Up ? <ArrowUp /> : <ArrowDown />}
     </button>

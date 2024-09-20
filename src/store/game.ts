@@ -90,7 +90,7 @@ function initialState() {
   return {
     state: GameState.Waiting,
     initialTroops: { [Sides.Attack]: 0, [Sides.Defense]: 0 },
-    troops: { [Sides.Attack]: 0, [Sides.Defense]: 0 },
+    troops: { [Sides.Attack]: 4, [Sides.Defense]: 4 },
     rolls: [],
     winner: null
   };
@@ -232,9 +232,7 @@ export const useGame = create<GameData>((set, get) => ({
       troops: updatedTroops
     }));
 
-    // Give some time for the UI to render the dice rolls before checking for game end
-    setTimeout(() => {
-    // Finds possible winner
+    // Finish the game
       if (updatedTroops[Sides.Defense] === 0) {
         console.log("ATACK!!!");
         set({ state: GameState.Finished, winner: Sides.Attack });
@@ -242,6 +240,5 @@ export const useGame = create<GameData>((set, get) => ({
         console.log("DEFENSE!!!");
         set({ state: GameState.Finished, winner: Sides.Defense });
       }
-    }, 4000); // Delay the game for we can see the results
   }
 }));

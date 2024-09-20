@@ -18,7 +18,7 @@ export function SideComponent({ side, direction }: SideProps) {
     <div
       className={cn(
         'flex-1 flex flex-col items-center justify-center',
-        isAttack ? 'bg-red-500' : 'bg-blue-500'
+        isAttack ? 'bg-red-500' : 'bg-yellow-500'
       )}>
       {direction === Direction.Down && state === GameState.Rolling && (
         <DiceGroup side={side} direction={direction} />
@@ -32,11 +32,11 @@ export function SideComponent({ side, direction }: SideProps) {
           onChange={(e) => setTroops(side, Number.parseInt(e.target.value) || 0)}
           className={cn(
             'w-32 h-16 text-center font-bold text-white text-2xl border-2 rounded-xl shadow-md focus:outline-none focus:ring-4 transition-all',
-            isAttack ? 'bg-red-400' : 'bg-blue-400',
-            isAttack ? 'border-red-300' : 'border-blue-300',
-            isAttack ? 'placeholder-red-200' : 'placeholder-blue-200',
-            isAttack ? 'focus:ring-red-300' : 'focus:ring-blue-300',
-            isAttack ? 'focus:border-red-200' : 'focus:border-blue-200'
+            isAttack ? 'bg-red-400' : 'bg-yellow-400',
+            isAttack ? 'border-red-300' : 'border-yellow-300',
+            isAttack ? 'placeholder-red-200' : 'placeholder-yellow-200',
+            isAttack ? 'focus:ring-red-300' : 'focus:ring-yellow-300',
+            isAttack ? 'focus:border-red-200' : 'focus:border-yellow-200'
           )}
         />
 

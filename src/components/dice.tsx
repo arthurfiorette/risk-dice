@@ -10,19 +10,16 @@ export function Dices({ side }: DiceProps) {
   const { getLastRoll } = useGame();
   const lastRoll = getLastRoll();
 
-  const filled = Array.from({ length: MAX_DICE_ROUNDS }, (_, i) => {
-    return lastRoll.dices[side][i] ?? null;
-  });
-
-  const otherSide = side === Sides.Attack ? Sides.Defense : Sides.Attack;
-
   if (!lastRoll) {
     return <></>;
   }
 
   return (
     <>
-      {filled.map((value, index) => (
+      {Array.from({ length: MAX_DICE_ROUNDS}, (_, index) => {
+        const value = lastRoll.dices[side][index];
+
+        return(
         <div
           key={index}
           className={cn(
@@ -30,15 +27,15 @@ export function Dices({ side }: DiceProps) {
             value && 'bg-white shadow-md',
             value && (side === Sides.Attack ? 'text-red-500' : 'text-blue-500'),
             // has on both sides
-            value &&
-              lastRoll.dices[otherSide][index] &&
+            value && lastRoll.dices[side === Sides.Attack ? Sides.Defense : Sides.Attack][index] &&
               // is winner
               side === lastRoll.winner &&
               'ring-4 ring-green-400'
           )}>
           {value}
         </div>
-      ))}
+        );
+      })}
     </>
   );
 }

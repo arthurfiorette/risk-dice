@@ -1,10 +1,7 @@
-import { useState } from 'react';
+import { useGame } from '../store/game';
 import { cn } from '../utils/cn';
 import { Direction, Sides } from '../utils/types';
 import { ArrowDown, ArrowUp } from './icons';
-import { useGame } from '../store/game';
-
-
 
 export interface ButtonsProps {
   side: Sides;

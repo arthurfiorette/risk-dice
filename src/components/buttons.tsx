@@ -25,7 +25,7 @@ export function ArrowButton({ side, direction, disabled }: ButtonsProps) {
 
   return (
     <button
-      type='button'
+      type="button"
       disabled={disabled}
       onClick={click}
       className={cn(
@@ -35,7 +35,8 @@ export function ArrowButton({ side, direction, disabled }: ButtonsProps) {
         side === Sides.Attack ? 'bg-red-600' : 'bg-yellow-600',
         side === Sides.Attack ? 'hover:bg-red-700' : 'hover:bg-yellow-700',
         side === Sides.Attack ? 'active:bg-red-800' : 'active:bg-yellow-800'
-      )}>
+      )}
+    >
       {direction === Direction.Up ? <ArrowUp /> : <ArrowDown />}
     </button>
   );

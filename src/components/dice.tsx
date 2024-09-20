@@ -10,15 +10,15 @@ export function Dices({ side }: DiceProps) {
   const { getLastRoll } = useGame();
   const lastRoll = getLastRoll();
 
-  if (!lastRoll) {
-    return <></>;
-  }
-
   const filled = Array.from({ length: MAX_DICE_ROUNDS }, (_, i) => {
     return lastRoll.dices[side][i] ?? null;
   });
 
   const otherSide = side === Sides.Attack ? Sides.Defense : Sides.Attack;
+
+  if (!lastRoll) {
+    return <></>;
+  }
 
   return (
     <>

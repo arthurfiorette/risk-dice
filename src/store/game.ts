@@ -90,7 +90,7 @@ function initialState() {
   return {
     state: GameState.Waiting,
     initialTroops: { [Sides.Attack]: 0, [Sides.Defense]: 0 },
-    troops: { [Sides.Attack]: 4, [Sides.Defense]: 4 },
+    troops: { [Sides.Attack]: 0, [Sides.Defense]: 0 },
     rolls: [],
     winner: null
   };
@@ -103,7 +103,11 @@ export const useGame = create<GameData>((set, get) => ({
     const { state, rollDices } = get();
 
     if (state === GameState.Finished) {
-      set(() => initialState());
+      set(() => ({
+        ...initialState(),
+        state: GameState.Waiting
+      }));
+
       return;
     }
 
@@ -203,8 +207,8 @@ export const useGame = create<GameData>((set, get) => ({
 
     // Total number of rounds - number of wins = number of troops lost
     const troopsLost: Record<Sides, number> = {
-      [Sides.Attack]: roundCount - wins[Sides.Defense],
-      [Sides.Defense]: roundCount - wins[Sides.Attack]
+      [Sides.Attack]: roundCount - wins[Sides.Attack],
+      [Sides.Defense]: roundCount - wins[Sides.Defense]
     };
 
     const updatedTroops = {
@@ -221,17 +225,23 @@ export const useGame = create<GameData>((set, get) => ({
       updatedTroops
     });
 
+    
     // Update store
     set((s) => ({
       rolls: [...s.rolls, { rounds, troopsLost, winner, dices }],
       troops: updatedTroops
     }));
 
+    // Give some time for the UI to render the dice rolls before checking for game end
+    setTimeout(() => {
     // Finds possible winner
-    if (updatedTroops[Sides.Defense] === 0) {
-      set({ state: GameState.Finished, winner: Sides.Attack });
-    } else if (updatedTroops[Sides.Attack] <= 1) {
-      set({ state: GameState.Finished, winner: Sides.Defense });
-    }
+      if (updatedTroops[Sides.Defense] === 0) {
+        console.log("ATACK!!!");
+        set({ state: GameState.Finished, winner: Sides.Attack });
+      } else if (updatedTroops[Sides.Attack] <= 1) {
+        console.log("DEFENSE!!!");
+        set({ state: GameState.Finished, winner: Sides.Defense });
+      }
+    }, 4000); // Delay the game for we can see the results
   }
 }));

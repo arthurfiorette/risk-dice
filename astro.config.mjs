@@ -8,5 +8,6 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
+  base: '/war-dice',
   integrations: [react(), tailwind()]
 });

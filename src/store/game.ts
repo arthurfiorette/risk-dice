@@ -75,6 +75,12 @@ export type GameData = {
    */
   nextRoundCount: () => number;
 
+  /** 
+   * Get the number of dices based on War's Logic
+  */
+  getAttackDicesCount: (troops: number) => number;
+  getDefenseDicesCount: (troops: number) => number;
+
   /**
    * Roll dices for each side.
    */
@@ -162,8 +168,25 @@ export const useGame = create<GameData>((set, get) => ({
     );
   },
 
+  getAttackDicesCount: (troops: number) => {
+      if(troops >= 4) return 3;
+      if(troops === 3) return 2;
+      if(troops === 2) return 1;
+      return 0;
+  },
+
+
+  getDefenseDicesCount: (troops: number) => {
+    if(troops >= 3) return 3;
+      if(troops === 2) return 2;
+      if(troops === 1) return 1;
+      return 0;
+  },
+
+
+
   rollDices: () => {
-    const { troops, nextRoundCount } = get();
+    const { troops, nextRoundCount, getAttackDicesCount, getDefenseDicesCount } = get  ();
     const roundCount = nextRoundCount();
 
     const dices: Record<Sides, number[]> = {
@@ -171,25 +194,9 @@ export const useGame = create<GameData>((set, get) => ({
       [Sides.Defense]: []
     };
 
-    //Give the number of dices based on war's logic
-    const getAttackDiceCount = (troops: number) => {
-      if(troops >= 4) return 3;
-      if(troops === 3) return 2;
-      if(troops === 2) return 1;
-        return 0;
-    };
-
-    //Give the number of dices based on war's logic
-    const getDefenseDiceCount = (troops: number) => {
-      if(troops >= 3) return 3;
-      if(troops === 2) return 2;
-      if(troops === 1) return 1;
-      return 0;
-    }
-
     //get the numbers
-    const attackDiceCount = getAttackDiceCount(troops[Sides.Attack]);
-    const defenseDiceCount = getDefenseDiceCount(troops[Sides.Defense]);
+    const attackDiceCount = getAttackDicesCount(troops[Sides.Attack]);
+    const defenseDiceCount = getDefenseDicesCount(troops[Sides.Defense]);
 
     // Roll dices
     for (const side of Object.values(Sides)) {

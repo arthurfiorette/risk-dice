@@ -7,9 +7,10 @@ import { DiceGroup } from './dice';
 export interface SideProps {
   side: Sides;
   direction: Direction;
+  isFixed?: boolean;
 }
 
-export function SideComponent({ side, direction }: SideProps) {
+export function SideComponent({ side, direction, isFixed}: SideProps) {
   const { state, troops, setTroops } = useGame();
 
   const isAttack = side === Sides.Attack;
@@ -40,9 +41,10 @@ export function SideComponent({ side, direction }: SideProps) {
             isAttack ? 'focus:ring-red-300' : 'focus:ring-yellow-300',
             isAttack ? 'focus:border-red-200' : 'focus:border-yellow-200'
           )}
+          disabled = {isFixed}
         />
 
-        {state === GameState.Waiting && (
+        {state === GameState.Waiting && !isFixed && (
           <div className="ml-2">
             <ArrowButton side={side} direction={Direction.Up} />
             <ArrowButton side={side} direction={Direction.Down} disabled={troops[side] === 1} />

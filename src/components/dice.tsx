@@ -32,7 +32,8 @@ export function Dices({ side, small, roll }: DiceProps) {
               otherValue &&
                 side === roll.rounds[index] &&
                 (small ? ' ring-2 ring-green-400' : ' ring-4 ring-green-400')
-            )}>
+            )}
+          >
             {value}
           </div>
         );
@@ -51,13 +52,15 @@ export function DiceHistory({ side }: DiceGroupProps) {
   return (
     <div
       className={cn(
-        'flex gap-5 overflow-x-scroll scrollbar-thin scrollbar-track-transparent my-3',
+        'flex gap-1 overflow-x-scroll scrollbar-thin scrollbar-track-transparent',
         side === Sides.Attack ? 'scrollbar-thumb-red-400' : 'scrollbar-thumb-yellow-400'
-      )}>
+      )}
+    >
       {[...rolls].reverse().map((roll, index) => (
         <div
           key={index}
-          className='flex my-2 transition-all animate-grow rounded-md opacity-80 gap-1'>
+          className="flex m-2 transition-all animate-grow rounded-md opacity-80 gap-1"
+        >
           <Dices side={side} roll={roll} small />
         </div>
       ))}

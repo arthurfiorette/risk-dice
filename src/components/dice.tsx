@@ -22,7 +22,7 @@ export function Dices({ side, small, roll }: DiceProps) {
           <div
             key={index}
             className={cn(
-              'rounded-lg flex items-center justify-center text-2xl font-bold ring-transparent',
+              'rounded-md flex items-center justify-center text-2xl font-bold ring-transparent',
               small ? 'w-6 h-6 text-sm' : 'w-12 h-12',
               value ? 'bg-white shadow-md' : 'opacity-0',
               !otherValue && 'bg-opacity-60',
@@ -60,7 +60,7 @@ export function DiceHistory({ side }: DiceGroupProps) {
       {[...rolls].reverse().map((roll, index) => (
         <div
           key={index}
-          className="flex gap-1 p-1 transition-all animate-grow rounded-md opacity-80"
+          className="flex my-2 transition-all animate-grow rounded-md opacity-80 gap-1"
         >
           <Dices side={side} roll={roll} small />
         </div>

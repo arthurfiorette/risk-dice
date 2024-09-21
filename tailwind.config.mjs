@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       height: {
-        screen: ['100vh', '100svh']
+        screen: ['100vh', '100dvh']
       },
       animation: {
         grow: 'grow 100ms ease-in-out'

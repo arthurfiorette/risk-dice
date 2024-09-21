@@ -22,8 +22,7 @@ export function SideComponent({ side, direction }: SideProps) {
       className={cn(
         'flex-1 flex flex-col items-center justify-between relative gap-10 ',
         isAttack ? 'bg-red-500' : 'bg-yellow-500'
-      )}
-    >
+      )}>
       <Icon
         className={cn(
           'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0',
@@ -33,7 +32,7 @@ export function SideComponent({ side, direction }: SideProps) {
       />
 
       {direction === Direction.Down && state !== GameState.Waiting && (
-        <div className="flex space-x-4 h-12 z-10 mt-auto">
+        <div className='flex space-x-4 h-12 z-10 mt-auto'>
           {last && <Dices side={side} roll={last} />}
         </div>
       )}
@@ -46,14 +45,13 @@ export function SideComponent({ side, direction }: SideProps) {
               ? 'mt-auto'
               : 'mb-auto'
             : 'my-auto'
-        )}
-      >
+        )}>
         <input
-          type="number"
+          type='number'
           value={troops[side]}
           disabled={state !== GameState.Waiting}
           min={0}
-          placeholder="?"
+          placeholder='?'
           onChange={(e) => setTroops(side, Number.parseInt(e.target.value))}
           className={cn(
             // remove arrows
@@ -69,15 +67,19 @@ export function SideComponent({ side, direction }: SideProps) {
         />
 
         {state === GameState.Waiting && (
-          <div className="ml-2">
+          <div className='ml-2'>
             <ArrowButton side={side} direction={Direction.Up} />
-            <ArrowButton side={side} direction={Direction.Down} disabled={troops[side] === 1} />
+            <ArrowButton
+              side={side}
+              direction={Direction.Down}
+              disabled={troops[side] === 1}
+            />
           </div>
         )}
       </div>
 
       {direction === Direction.Up && state !== GameState.Waiting && (
-        <div className="flex space-x-4 h-12 z-10 mb-auto">
+        <div className='flex space-x-4 h-12 z-10 mb-auto'>
           {last && <Dices side={side} roll={last} />}
         </div>
       )}

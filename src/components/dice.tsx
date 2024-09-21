@@ -1,7 +1,6 @@
-import { useRef } from 'react';
-import { MAX_DICE_ROUNDS, useGame, type RollDice } from '../store/game';
+import { MAX_DICE_ROUNDS, type RollDice, useGame } from '../store/game';
 import { cn } from '../utils/cn';
-import { Direction, Sides } from '../utils/types';
+import { Sides } from '../utils/types';
 
 export interface DiceProps {
   side: Sides;
@@ -33,8 +32,7 @@ export function Dices({ side, small, roll }: DiceProps) {
               otherValue &&
                 side === roll.rounds[index] &&
                 (small ? ' ring-2 ring-green-400' : ' ring-4 ring-green-400')
-            )}
-          >
+            )}>
             {value}
           </div>
         );
@@ -55,13 +53,11 @@ export function DiceHistory({ side }: DiceGroupProps) {
       className={cn(
         'flex gap-5 overflow-x-scroll scrollbar-thin scrollbar-track-transparent my-3',
         side === Sides.Attack ? 'scrollbar-thumb-red-400' : 'scrollbar-thumb-yellow-400'
-      )}
-    >
+      )}>
       {[...rolls].reverse().map((roll, index) => (
         <div
           key={index}
-          className="flex my-2 transition-all animate-grow rounded-md opacity-80 gap-1"
-        >
+          className='flex my-2 transition-all animate-grow rounded-md opacity-80 gap-1'>
           <Dices side={side} roll={roll} small />
         </div>
       ))}

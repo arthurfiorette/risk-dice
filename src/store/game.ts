@@ -1,8 +1,6 @@
 import { create } from 'zustand';
 import { rollDice } from '../utils/math';
 import { GameState, Sides } from '../utils/types';
-import { createJSONStorage, persist } from 'zustand/middleware';
-import { useEffect } from 'react';
 
 export type RollDice = {
   /**

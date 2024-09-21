@@ -1,3 +1,4 @@
+import { PiArrowCounterClockwise } from 'react-icons/pi';
 import { useDisableOnChange } from '../hooks/disable-on-change';
 import { useGame } from '../store/game';
 import { cn } from '../utils/cn';
@@ -5,7 +6,6 @@ import { getActionMessage, getPlayDelay } from '../utils/messages';
 import { Direction, GameState, Sides } from '../utils/types';
 import { DiceHistory } from './dice';
 import { SideComponent } from './side';
-import { PiArrowCounterClockwise } from 'react-icons/pi';
 
 export default function Page() {
   const { play, state, nextRoundCount, reset } = useGame();

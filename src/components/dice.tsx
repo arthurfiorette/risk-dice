@@ -1,39 +1,38 @@
-import { MAX_DICE_ROUNDS, useGame } from '../store/game';
+import { useRef } from 'react';
+import { MAX_DICE_ROUNDS, useGame, type RollDice } from '../store/game';
 import { cn } from '../utils/cn';
 import { Direction, Sides } from '../utils/types';
 
 export interface DiceProps {
   side: Sides;
+  roll: RollDice;
+  small?: boolean;
 }
 
-export function Dices({ side }: DiceProps) {
-  const { getLastRoll } = useGame();
-  const lastRoll = getLastRoll();
-
-  if (!lastRoll) {
-    return <></>;
-  }
-
+export function Dices({ side, small, roll }: DiceProps) {
   const oppositeSide = side === Sides.Attack ? Sides.Defense : Sides.Attack;
 
   return (
     <>
       {Array.from({ length: MAX_DICE_ROUNDS }, (_, index) => {
-        const value = lastRoll.dices[side][index];
+        const value = roll.dices[side][index];
+        const otherValue = roll.dices[oppositeSide][index];
 
         return (
           <div
             key={index}
             className={cn(
-              'w-12 h-12 rounded-lg flex items-center justify-center text-2xl font-bold',
-              value && 'bg-white shadow-md',
-              value && (side === Sides.Attack ? 'text-red-500' : 'text-blue-500'),
-              // has on both sides
-              value &&
-                lastRoll.dices[oppositeSide][index] &&
-                // is winner
-                side === lastRoll.winner &&
-                'ring-4 ring-green-400'
+              'rounded-lg flex items-center justify-center text-2xl font-bold',
+              small ? 'w-6 h-6 text-sm' : 'w-12 h-12',
+              value ? 'bg-white shadow-md' : 'opacity-0',
+              !otherValue && 'bg-opacity-60',
+
+              side === Sides.Attack ? 'text-red-500' : 'text-yellow-500',
+
+              // is winner
+              otherValue &&
+                side === roll.rounds[index] &&
+                (small ? 'ring-2 ring-green-400' : 'ring-4 ring-green-400')
             )}
           >
             {value}
@@ -44,39 +43,25 @@ export function Dices({ side }: DiceProps) {
   );
 }
 
-export interface DiceGroupProps extends DiceProps {
-  direction: Direction;
+export interface DiceGroupProps {
+  side: Sides;
 }
 
-export function DiceGroup({ side, direction }: DiceGroupProps) {
-  const { troops, initialTroops } = useGame();
-  const isAttack = side === Sides.Attack;
+export function DiceHistory({ side }: DiceGroupProps) {
+  const rolls = useGame((g) => g.rolls).slice(0, -1);
 
   return (
-    <>
-      {direction === Direction.Down && (
-        <div className="flex space-x-4 mt-16 h-12">
-          <Dices side={side} />
-        </div>
+    <div
+      className={cn(
+        'flex w-full gap-5 overflow-x-scroll scrollbar-thin scrollbar-track-transparent',
+        side === Sides.Attack ? 'scrollbar-thumb-red-400' : 'scrollbar-thumb-yellow-400'
       )}
-
-      <div className="my-auto">
-        <div className="w-16 ml-2 h-12 rounded-lg flex items-center justify-center text-2xl font-bold text-white gap-1">
-          <div className={cn(isAttack ? 'text-red-300' : 'text-blue-300')}>
-            {troops[side] - initialTroops[side]}
-          </div>
-          /
-          <div className={cn(isAttack ? 'text-red-700' : 'text-blue-700')}>
-            {initialTroops[side]}
-          </div>
+    >
+      {rolls.reverse().map((roll) => (
+        <div key={JSON.stringify(roll)} className="flex gap-1 p-1">
+          <Dices side={side} roll={roll} small />
         </div>
-      </div>
-
-      {direction === Direction.Up && (
-        <div className="flex space-x-4 mb-16 h-12">
-          <Dices side={side} />
-        </div>
-      )}
-    </>
+      ))}
+    </div>
   );
 }

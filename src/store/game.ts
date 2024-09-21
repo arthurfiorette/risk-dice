@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { rollDice } from '../utils/math';
 import { GameState, Sides } from '../utils/types';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import { useEffect } from 'react';
 
 export type RollDice = {
   /**
@@ -68,7 +70,7 @@ export type GameData = {
   /**
    * Get dices for each side
    */
-  nextDiceCount: () => Record<Sides, number>;
+  nextDiceCount: (side: Sides, troops: number) => number;
 
   /**
    * The number of dice rounds that can be rolled.
@@ -105,7 +107,8 @@ export const useGame = create<GameData>((set, get) => ({
     if (state === GameState.Finished) {
       set(() => ({
         ...initialState(),
-        state: GameState.Waiting
+        state: GameState.Waiting,
+        rolls: []
       }));
 
       return;
@@ -128,7 +131,7 @@ export const useGame = create<GameData>((set, get) => ({
     set((state) => ({
       troops: {
         ...state.troops,
-        [side]: Math.max(1, typeof value === 'function' ? value(state.troops[side]) : value)
+        [side]: Math.max(0, typeof value === 'function' ? value(state.troops[side]) : value)
       }
     }));
   },
@@ -138,32 +141,37 @@ export const useGame = create<GameData>((set, get) => ({
     return rolls[rolls.length - 1];
   },
 
-  nextDiceCount: () => {
-    const { troops: currentTroops } = get();
+  nextDiceCount: (side, troops) => {
+    if (side === Sides.Attack) {
+      if (troops >= 4) return 3;
+      if (troops === 3) return 2;
+      if (troops === 2) return 1;
+    } else {
+      if (troops >= 3) return 3;
+      if (troops === 2) return 2;
+      if (troops === 1) return 1;
+    }
 
-    return {
-      [Sides.Attack]: Math.min(currentTroops[Sides.Attack], MAX_DICE_ROUNDS),
-      [Sides.Defense]: Math.min(currentTroops[Sides.Defense], MAX_DICE_ROUNDS)
-    };
+    return 0;
   },
 
   nextRoundCount: () => {
-    const { troops: currentTroops } = get();
+    const { troops } = get();
 
     return Math.max(
       0,
       Math.min(
         MAX_DICE_ROUNDS,
         // Defense amount
-        currentTroops[Sides.Defense],
+        troops[Sides.Defense],
         // Attack amount - 1 because 1 has to stay behind
-        currentTroops[Sides.Attack] - 1
+        troops[Sides.Attack] - 1
       )
     );
   },
 
   rollDices: () => {
-    const { troops, nextRoundCount } = get();
+    const { troops, nextRoundCount, nextDiceCount } = get();
     const roundCount = nextRoundCount();
 
     const dices: Record<Sides, number[]> = {
@@ -171,29 +179,10 @@ export const useGame = create<GameData>((set, get) => ({
       [Sides.Defense]: []
     };
 
-    //Give the number of dices based on war's logic
-    const getAttackDiceCount = (troops: number) => {
-      if(troops >= 4) return 3;
-      if(troops === 3) return 2;
-      if(troops === 2) return 1;
-        return 0;
-    };
-
-    //Give the number of dices based on war's logic
-    const getDefenseDiceCount = (troops: number) => {
-      if(troops >= 3) return 3;
-      if(troops === 2) return 2;
-      if(troops === 1) return 1;
-      return 0;
-    }
-
-    //get the numbers
-    const attackDiceCount = getAttackDiceCount(troops[Sides.Attack]);
-    const defenseDiceCount = getDefenseDiceCount(troops[Sides.Defense]);
-
     // Roll dices
     for (const side of Object.values(Sides)) {
-      const count = side === Sides.Attack ? attackDiceCount : defenseDiceCount;
+      const count = nextDiceCount(side, troops[side]);
+
       for (let i = 0; i < count; i++) {
         dices[side].push(rollDice());
       }
@@ -230,15 +219,6 @@ export const useGame = create<GameData>((set, get) => ({
       [Sides.Attack]: troops[Sides.Attack] - troopsLost[Sides.Attack],
       [Sides.Defense]: troops[Sides.Defense] - troopsLost[Sides.Defense]
     };
-
-    console.log({
-      roundCount,
-      dices,
-      rounds,
-      winner,
-      troopsLost,
-      updatedTroops
-    });
 
     // Update store
     set((s) => ({

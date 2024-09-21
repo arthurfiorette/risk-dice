@@ -103,7 +103,11 @@ export const useGame = create<GameData>((set, get) => ({
     const { state, rollDices } = get();
 
     if (state === GameState.Finished) {
-      set(() => initialState());
+      set(() => ({
+        ...initialState(),
+        state: GameState.Waiting
+      }));
+
       return;
     }
 
@@ -124,10 +128,7 @@ export const useGame = create<GameData>((set, get) => ({
     set((state) => ({
       troops: {
         ...state.troops,
-        [side]: Math.max(
-          1,
-          typeof value === 'function' ? value(state.troops[side]) : value
-        )
+        [side]: Math.max(1, typeof value === 'function' ? value(state.troops[side]) : value)
       }
     }));
   },
@@ -162,9 +163,7 @@ export const useGame = create<GameData>((set, get) => ({
   },
 
   rollDices: () => {
-    const { troops, nextDiceCount, nextRoundCount } = get();
-
-    const diceCount = nextDiceCount();
+    const { troops, nextRoundCount } = get();
     const roundCount = nextRoundCount();
 
     const dices: Record<Sides, number[]> = {
@@ -172,9 +171,30 @@ export const useGame = create<GameData>((set, get) => ({
       [Sides.Defense]: []
     };
 
+    //Give the number of dices based on war's logic
+    const getAttackDiceCount = (troops: number) => {
+      if(troops >= 4) return 3;
+      if(troops === 3) return 2;
+      if(troops === 2) return 1;
+        return 0;
+    };
+
+    //Give the number of dices based on war's logic
+    const getDefenseDiceCount = (troops: number) => {
+      if(troops >= 3) return 3;
+      if(troops === 2) return 2;
+      if(troops === 1) return 1;
+      return 0;
+    }
+
+    //get the numbers
+    const attackDiceCount = getAttackDiceCount(troops[Sides.Attack]);
+    const defenseDiceCount = getDefenseDiceCount(troops[Sides.Defense]);
+
     // Roll dices
     for (const side of Object.values(Sides)) {
-      for (let i = 0; i < diceCount[side]!; i++) {
+      const count = side === Sides.Attack ? attackDiceCount : defenseDiceCount;
+      for (let i = 0; i < count; i++) {
         dices[side].push(rollDice());
       }
 
@@ -198,13 +218,12 @@ export const useGame = create<GameData>((set, get) => ({
     }
 
     // Finds final winner
-    const winner =
-      wins[Sides.Attack] > wins[Sides.Defense] ? Sides.Attack : Sides.Defense;
+    const winner = wins[Sides.Attack] > wins[Sides.Defense] ? Sides.Attack : Sides.Defense;
 
     // Total number of rounds - number of wins = number of troops lost
     const troopsLost: Record<Sides, number> = {
-      [Sides.Attack]: roundCount - wins[Sides.Defense],
-      [Sides.Defense]: roundCount - wins[Sides.Attack]
+      [Sides.Attack]: roundCount - wins[Sides.Attack],
+      [Sides.Defense]: roundCount - wins[Sides.Defense]
     };
 
     const updatedTroops = {
@@ -227,7 +246,7 @@ export const useGame = create<GameData>((set, get) => ({
       troops: updatedTroops
     }));
 
-    // Finds possible winner
+    // Finish the game
     if (updatedTroops[Sides.Defense] === 0) {
       set({ state: GameState.Finished, winner: Sides.Attack });
     } else if (updatedTroops[Sides.Attack] <= 1) {

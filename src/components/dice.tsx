@@ -57,9 +57,9 @@ export function DiceHistory({ side }: DiceGroupProps) {
         side === Sides.Attack ? 'scrollbar-thumb-red-400' : 'scrollbar-thumb-yellow-400'
       )}
     >
-      {[...rolls].reverse().map((roll) => (
+      {[...rolls].reverse().map((roll, index) => (
         <div
-          key={JSON.stringify(roll)}
+          key={index}
           className="flex gap-1 p-1 transition-all animate-grow rounded-md opacity-80"
         >
           <Dices side={side} roll={roll} small />

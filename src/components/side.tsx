@@ -1,8 +1,9 @@
+import { PiShieldCheckeredFill, PiSwordDuotone } from 'react-icons/pi';
 import { useGame } from '../store/game';
 import { cn } from '../utils/cn';
 import { Direction, GameState, Sides } from '../utils/types';
 import { ArrowButton } from './buttons';
-import { DiceHistory, Dices } from './dice';
+import { Dices } from './dice';
 
 export interface SideProps {
   side: Sides;
@@ -14,35 +15,39 @@ export function SideComponent({ side, direction }: SideProps) {
   const isAttack = side === Sides.Attack;
   const last = getLastRoll();
 
+  const Icon = isAttack ? PiSwordDuotone : PiShieldCheckeredFill;
+
   return (
     <div
       className={cn(
-        'flex-1 flex flex-col items-center justify-between relative gap-2',
+        'flex-1 flex flex-col items-center justify-between relative gap-10 ',
         isAttack ? 'bg-red-500' : 'bg-yellow-500'
       )}
     >
-      {/* {direction === Direction.Down && <DiceHistory side={side} />} */}
+      <Icon
+        className={cn(
+          'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0',
+          'w-[50%] h-[50%] mb-[-0.5rem] opacity-50',
+          isAttack ? 'text-red-600' : 'text-yellow-600'
+        )}
+      />
 
       {direction === Direction.Down && state !== GameState.Waiting && (
-        <div className="flex space-x-4 h-12 my-auto">
+        <div className="flex space-x-4 h-12 z-10 mt-auto">
           {last && <Dices side={side} roll={last} />}
         </div>
       )}
 
-      <div className="flex items-center justify-center my-auto">
-        {last && (
-          <div className="mr-2">
-            <div
-              className={cn(
-                'text-white p-2 flex items-center justify-center focus:outline-none rounded-lg',
-                side === Sides.Attack ? 'bg-red-600' : 'bg-yellow-600'
-              )}
-            >
-              {-last.troopsLost[side]}
-            </div>
-          </div>
+      <div
+        className={cn(
+          'flex items-center justify-center z-10',
+          state !== GameState.Waiting
+            ? direction === Direction.Up
+              ? 'mt-auto'
+              : 'mb-auto'
+            : 'my-auto'
         )}
-
+      >
         <input
           type="number"
           value={troops[side]}
@@ -72,12 +77,10 @@ export function SideComponent({ side, direction }: SideProps) {
       </div>
 
       {direction === Direction.Up && state !== GameState.Waiting && (
-        <div className="flex space-x-4 h-12 my-auto">
+        <div className="flex space-x-4 h-12 z-10 mb-auto">
           {last && <Dices side={side} roll={last} />}
         </div>
       )}
-
-      {/* {direction === Direction.Up && <DiceHistory side={side} />} */}
     </div>
   );
 }

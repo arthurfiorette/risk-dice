@@ -63,6 +63,11 @@ export type GameData = {
   play: () => void;
 
   /**
+   * Resets the game to the initial state.
+   */
+  reset: () => void;
+
+  /**
    * Get the last roll that was made.
    */
   getLastRoll: () => RollDice | undefined;
@@ -92,7 +97,7 @@ function initialState() {
   return {
     state: GameState.Waiting,
     initialTroops: { [Sides.Attack]: 0, [Sides.Defense]: 0 },
-    troops: { [Sides.Attack]: 4, [Sides.Defense]: 4 },
+    troops: { [Sides.Attack]: 100, [Sides.Defense]: 100 },
     rolls: [],
     winner: null
   };
@@ -102,14 +107,10 @@ export const useGame = create<GameData>((set, get) => ({
   ...initialState(),
 
   play: () => {
-    const { state, rollDices } = get();
+    const { state, rollDices, reset } = get();
 
     if (state === GameState.Finished) {
-      set(() => ({
-        ...initialState(),
-        state: GameState.Waiting,
-        rolls: []
-      }));
+      reset();
 
       return;
     }
@@ -125,6 +126,10 @@ export const useGame = create<GameData>((set, get) => ({
 
     // Rolls dices for Waiting and Rolling states
     rollDices();
+  },
+
+  reset: () => {
+    set(() => initialState());
   },
 
   setTroops: (side, value) => {

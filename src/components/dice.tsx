@@ -22,7 +22,7 @@ export function Dices({ side, small, roll }: DiceProps) {
           <div
             key={index}
             className={cn(
-              'rounded-lg flex items-center justify-center text-2xl font-bold',
+              'rounded-lg flex items-center justify-center text-2xl font-bold ring-transparent',
               small ? 'w-6 h-6 text-sm' : 'w-12 h-12',
               value ? 'bg-white shadow-md' : 'opacity-0',
               !otherValue && 'bg-opacity-60',
@@ -32,7 +32,7 @@ export function Dices({ side, small, roll }: DiceProps) {
               // is winner
               otherValue &&
                 side === roll.rounds[index] &&
-                (small ? 'ring-2 ring-green-400' : 'ring-4 ring-green-400')
+                (small ? ' ring-2 ring-green-400' : ' ring-4 ring-green-400')
             )}
           >
             {value}
@@ -48,17 +48,20 @@ export interface DiceGroupProps {
 }
 
 export function DiceHistory({ side }: DiceGroupProps) {
-  const rolls = useGame((g) => g.rolls).slice(0, -1);
+  const rolls = useGame((g) => g.rolls);
 
   return (
     <div
       className={cn(
-        'flex w-full gap-5 overflow-x-scroll scrollbar-thin scrollbar-track-transparent',
+        'flex gap-5 overflow-x-scroll scrollbar-thin scrollbar-track-transparent my-3',
         side === Sides.Attack ? 'scrollbar-thumb-red-400' : 'scrollbar-thumb-yellow-400'
       )}
     >
-      {rolls.reverse().map((roll) => (
-        <div key={JSON.stringify(roll)} className="flex gap-1 p-1">
+      {[...rolls].reverse().map((roll) => (
+        <div
+          key={JSON.stringify(roll)}
+          className="flex gap-1 p-1 transition-all animate-grow rounded-md opacity-80"
+        >
           <Dices side={side} roll={roll} small />
         </div>
       ))}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function useDisableOnChange(def: boolean, dependencies: any[]) {
+export function useDisableOnChange(def: boolean, ms: number, dependencies: any[]) {
   const [disabled, setDisabled] = useState(def);
 
   useEffect(() => {
@@ -8,12 +8,12 @@ export function useDisableOnChange(def: boolean, dependencies: any[]) {
 
     const timeout = setTimeout(() => {
       setDisabled(false);
-    }, 500);
+    }, ms);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, dependencies);
+  }, [ms, ...dependencies]);
 
   return disabled;
 }

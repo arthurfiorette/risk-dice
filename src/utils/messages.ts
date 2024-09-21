@@ -10,3 +10,14 @@ export function getActionMessage(state: GameState) {
       return 'Roll again';
   }
 }
+
+export function getPlayDelay(state: GameState) {
+  switch (state) {
+    case GameState.Finished:
+      return 1000;
+    case GameState.Waiting:
+      return 125;
+    case GameState.Rolling:
+      return 250;
+  }
+}

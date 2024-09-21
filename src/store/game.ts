@@ -95,7 +95,7 @@ function initialState() {
   return {
     state: GameState.Waiting,
     initialTroops: { [Sides.Attack]: 0, [Sides.Defense]: 0 },
-    troops: { [Sides.Attack]: 100, [Sides.Defense]: 100 },
+    troops: { [Sides.Attack]: 4, [Sides.Defense]: 4 },
     rolls: [],
     winner: null
   };

@@ -14,7 +14,7 @@ export default function Page() {
     useDisableOnChange(false, [state]) || (state !== GameState.Finished && rounds === 0);
 
   return (
-    <div className="flex flex-col h-screen relative">
+    <div className="flex flex-col h-screen relative overflow-hidden">
       <SideComponent side={Sides.Attack} direction={Direction.Up} />
 
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center max-w-full">

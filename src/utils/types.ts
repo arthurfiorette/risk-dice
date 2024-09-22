@@ -1,6 +1,6 @@
 export enum Sides {
-  Defense = 'defense',
-  Attack = 'attack'
+  Attack = 'attack',
+  Defense = 'defense'
 }
 
 export enum GameState {

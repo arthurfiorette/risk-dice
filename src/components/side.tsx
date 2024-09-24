@@ -11,9 +11,12 @@ export interface SideProps {
 }
 
 export function SideComponent({ side, direction }: SideProps) {
-  const { state, troops, setTroops, getLastRoll, winner } = useGame();
+  const state  = useGame((state) => state.state);
+  const troops = useGame((state) => state.troops);
+  const setTroops = useGame((state) => state.setTroops);
+  const last = useGame((state) => state.getLastRoll)();
+  const winner = useGame((state) => state.winner);
   const isAttack = side === Sides.Attack;
-  const last = getLastRoll();
 
   const Icon = isAttack ? PiSwordDuotone : PiShieldCheckeredFill;
 

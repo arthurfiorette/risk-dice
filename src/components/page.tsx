@@ -8,8 +8,10 @@ import { DiceHistory } from './dice';
 import { SideComponent } from './side';
 
 export default function Page() {
-  const { play, state, nextRoundCount, reset } = useGame();
-  const rounds = nextRoundCount();
+  const play = useGame((state) => state.play);
+  const state = useGame((state) => state.state);
+  const reset = useGame((state) => state.reset);
+  const rounds = useGame((state) => state.nextRoundCount)();
 
   const disabled =
     useDisableOnChange(false, getPlayDelay(state), [state]) ||

@@ -2,6 +2,7 @@
 import Page from '../components/page.tsx';
 import { SEO } from 'astro-seo';
 import { SeoProps } from '../utils/seo';
+import { pwaInfo } from 'virtual:pwa-info';
 ---
 
 <html lang='en'>
@@ -10,6 +11,7 @@ import { SeoProps } from '../utils/seo';
 		<meta name='viewport' content='width=device-width' />
 		<title>Risk Dice Roller</title>
 		<SEO {...SeoProps} />
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
 	</head>
 
 	<body>

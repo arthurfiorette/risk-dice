@@ -25,8 +25,7 @@ export const SeoProps: Props = {
       { rel: 'apple-touch-icon', sizes: '180x180', href: `${URL}/apple-touch-icon.png` },
       { rel: 'icon', type: 'image/png', sizes: '48x48', href: `${URL}/favicon-48.png` },
       { rel: 'icon', type: 'image/png', sizes: '32x32', href: `${URL}/favicon-32.png` },
-      { rel: 'icon', type: 'image/png', sizes: '16x16', href: `${URL}/favicon-16.png` },
-      { rel: 'manifest', href: `${URL}/manifest.webmanifest` }
+      { rel: 'icon', type: 'image/png', sizes: '16x16', href: `${URL}/favicon-16.png` }
     ],
     meta: [
       { name: 'msapplication-TileColor', content: '#EF7244' },
@@ -48,12 +47,12 @@ export const manifest = {
   display: 'standalone',
   icons: [
     {
-      src: `${URL}/android-chrome-192x192.png`,
+      src: `${URL}/android-chrome-192.png`,
       sizes: '192x192',
       type: 'image/png'
     },
     {
-      src: `${URL}/android-chrome-512x512.png`,
+      src: `${URL}/android-chrome-512.png`,
       sizes: '512x512',
       type: 'image/png'
     }

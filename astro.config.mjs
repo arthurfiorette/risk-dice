@@ -25,7 +25,6 @@ export default defineConfig({
     AstroPWA({
       registerType: 'autoUpdate',
       manifest,
-      manifestFilename: 'manifest.webmanifest',
       base: BASE_PATH,
       workbox: {
         globDirectory: 'dist',

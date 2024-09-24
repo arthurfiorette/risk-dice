@@ -1,14 +1,15 @@
 ---
 import Page from '../components/page.tsx';
+import { SEO } from 'astro-seo';
+import { SeoProps } from '../utils/seo';
 ---
 
-<html lang="en">
-
+<html lang='en'>
 	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<title>Astro</title>
+		<meta charset='utf-8' />
+		<meta name='viewport' content='width=device-width' />
+		<title>Risk Dice Roller</title>
+		<SEO {...SeoProps} />
 	</head>
 
 	<body>

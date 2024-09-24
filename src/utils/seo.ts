@@ -2,7 +2,7 @@ import type { Props } from 'astro-seo';
 import type { ManifestOptions } from 'vite-plugin-pwa';
 
 export const DOMAIN = 'https://arthur.run';
-export const BASE_PATH = process.env.BASE_URL || '';
+export const BASE_PATH = process.env.BASE_URL || 'risk-dice';
 
 export const URL = `${DOMAIN}/${BASE_PATH}`;
 
@@ -22,12 +22,12 @@ export const SeoProps: Props = {
   },
   extend: {
     link: [
-      { rel: 'icon', href: '/favicon.ico' },
-      { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-      { rel: 'icon', type: 'image/png', sizes: '48x48', href: '/favicon-48.png' },
-      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' },
-      { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16.png' },
-      { rel: 'manifest', href: '/manifest.json' }
+      { rel: 'icon', href: `${URL}/favicon.ico` },
+      { rel: 'apple-touch-icon', sizes: '180x180', href: `${URL}/apple-touch-icon.png` },
+      { rel: 'icon', type: 'image/png', sizes: '48x48', href: `${URL}/favicon-48.png` },
+      { rel: 'icon', type: 'image/png', sizes: '32x32', href: `${URL}/favicon-32.png` },
+      { rel: 'icon', type: 'image/png', sizes: '16x16', href: `${URL}/favicon-16.png` },
+      { rel: 'manifest', href: `${URL}/manifest.json` }
     ],
     meta: [
       { name: 'msapplication-TileColor', content: '#EF7244' },
@@ -49,12 +49,12 @@ export const manifest: Partial<ManifestOptions> = {
   display: 'standalone',
   icons: [
     {
-      src: '/android-chrome-192x192.png',
+      src: `${URL}/android-chrome-192x192.png`,
       sizes: '192x192',
       type: 'image/png'
     },
     {
-      src: '/android-chrome-512x512.png',
+      src: `${URL}/android-chrome-512x512.png`,
       sizes: '512x512',
       type: 'image/png'
     }

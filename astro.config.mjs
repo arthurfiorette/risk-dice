@@ -16,6 +16,7 @@ export default defineConfig({
       VitePWA({
         registerType: 'autoUpdate',
         manifest,
+        base: BASE_PATH,
         workbox: {
           globDirectory: 'dist',
           globPatterns: ['**/*.{js,css,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'],

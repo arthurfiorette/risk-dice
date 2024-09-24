@@ -1,5 +1,4 @@
 import type { Props } from 'astro-seo';
-import type { PwaOptions } from '@vite-pwa/astro';
 
 export const DOMAIN = 'https://arthur.run';
 export const BASE_PATH = process.env.BASE_URL || 'risk-dice';

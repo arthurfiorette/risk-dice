@@ -13,7 +13,7 @@ export default defineConfig({
   base: BASE_PATH,
   output: 'static',
   build: {
-    format: 'file'
+    format: 'file',
   },
   integrations: [react(), tailwind(), sitemap(), compress(), robotsTxt()],
   vite: {

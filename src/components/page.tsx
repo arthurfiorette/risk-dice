@@ -16,32 +16,30 @@ export default function Page() {
     (state !== GameState.Finished && rounds === 0);
 
   return (
-    <div className="flex flex-col h-screen relative overflow-hidden">
+    <div className='flex flex-col h-screen relative overflow-hidden'>
       <SideComponent side={Sides.Attack} direction={Direction.Up} />
 
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col max-w-full gap-1">
+      <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col max-w-full gap-1'>
         <DiceHistory side={Sides.Attack} />
 
-        <div className="flex gap-2 self-center">
+        <div className='flex gap-2 self-center'>
           <button
-            type="submit"
+            type='submit'
             disabled={disabled}
             onClick={play}
             className={cn(
               'bg-green-500 text-white px-6 py-3 rounded-full text-xl font-bold shadow-lg hover:bg-green-600 active:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 transition-all z-10',
               disabled && 'cursor-not-allowed opacity-50'
-            )}
-          >
+            )}>
             {getActionMessage(state)}
           </button>
 
           {state === GameState.Rolling && (
             <button
               onClick={reset}
-              type="button"
-              className="my-auto font-bold text-red-800 rounded-full text-xl w-7 h-7 flex justify-center items-center hover:bg-black hover:bg-opacity-10 active:bg-opacity-20 transition-all z-10"
-            >
-              <PiArrowCounterClockwise />
+              type='button'
+              className='my-auto font-bold text-red-800 rounded-full text-xl flex justify-center items-center hover:text-white transition-all z-10'>
+              <PiArrowCounterClockwise size={32} />
             </button>
           )}
         </div>
@@ -50,6 +48,13 @@ export default function Page() {
       </div>
 
       <SideComponent side={Sides.Defense} direction={Direction.Down} />
+
+      <div className='absolute bottom-0 left-full -translate-x-full -translate-y-0 font-semibold p-2 w-full text-yellow-900'>
+        Made by{' '}
+        <a href='https://arthur.place/' className='hover:underline'>
+          Arthur Fiorette
+        </a>
+      </div>
     </div>
   );
 }

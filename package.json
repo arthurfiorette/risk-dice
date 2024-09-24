@@ -1,10 +1,10 @@
 {
-  "name": "@arthurfiorette/war-dice",
+  "name": "@arthurfiorette/risk-dice",
   "version": "1.0.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/arthurfiorette/war-dice.git"
+    "url": "git+ssh://git@github.com/arthurfiorette/risk-dice.git"
   },
   "license": "MIT",
   "author": "Arthur Fiorette <me@arthur.place>",

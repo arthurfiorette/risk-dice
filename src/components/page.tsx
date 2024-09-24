@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
 import { PiArrowCounterClockwise } from 'react-icons/pi';
-import { useDisableOnChange } from '../hooks/disable-on-change';
 import { useGame } from '../store/game';
 import { cn } from '../utils/cn';
-import { getActionMessage, getPlayDelay } from '../utils/messages';
+import { getActionMessage, getColorButton, getPlayDelay } from '../utils/messages';
 import { Direction, GameState, Sides } from '../utils/types';
 import { DiceHistory } from './dice';
 import { SideComponent } from './side';
@@ -13,9 +13,17 @@ export default function Page() {
   const reset = useGame((state) => state.reset);
   const rounds = useGame((state) => state.nextRoundCount)();
 
-  const disabled =
-    useDisableOnChange(false, getPlayDelay(state), [state]) ||
-    (state !== GameState.Finished && rounds === 0);
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    setDisabled(true);
+
+    const timeout = setTimeout(() => {
+      setDisabled(false);
+    }, getPlayDelay(state));
+
+    return () => clearTimeout(timeout);
+  }, [rounds]);
 
   return (
     <div className='flex flex-col h-screen relative overflow-hidden'>
@@ -30,8 +38,9 @@ export default function Page() {
             disabled={disabled}
             onClick={play}
             className={cn(
-              'bg-green-500 text-white px-6 py-3 rounded-full text-xl font-bold shadow-lg hover:bg-green-600 active:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 transition-all z-10',
-              disabled && 'cursor-not-allowed opacity-50'
+              'text-white px-6 py-3 rounded-full  text-xl font-bold shadow-lg focus:outline-none focus:ring-4 transition-all z-10',
+              disabled && 'cursor-not-allowed opacity-50',
+              getColorButton(state)
             )}>
             {getActionMessage(state)}
           </button>

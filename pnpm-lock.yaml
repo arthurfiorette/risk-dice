@@ -32,6 +32,9 @@ importers:
       '@types/react-dom':
         specifier: 18.3.0
         version: 18.3.0
+      '@vite-pwa/astro':
+        specifier: ^0.4.3
+        version: 0.4.3(astro@4.15.8(@types/node@22.5.5)(lightningcss@1.25.1)(rollup@2.79.1)(terser@5.33.0)(typescript@5.6.2))(vite-plugin-pwa@0.20.5(vite@5.4.6(@types/node@22.5.5)(lightningcss@1.25.1)(terser@5.33.0))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.1.0))
       astro:
         specifier: 4.15.8
         version: 4.15.8(@types/node@22.5.5)(lightningcss@1.25.1)(rollup@2.79.1)(terser@5.33.0)(typescript@5.6.2)
@@ -68,9 +71,6 @@ importers:
       typescript:
         specifier: 5.6.2
         version: 5.6.2
-      vite-plugin-pwa:
-        specifier: ^0.20.5
-        version: 0.20.5(vite@5.4.6(@types/node@22.5.5)(lightningcss@1.25.1)(terser@5.33.0))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.1.0)
       zustand:
         specifier: 5.0.0-rc.2
         version: 5.0.0-rc.2(@types/react@18.3.8)(react@18.3.1)
@@ -1456,6 +1456,16 @@ packages:
 
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
+
+  '@vite-pwa/astro@0.4.3':
+    resolution: {integrity: sha512-IfcDw8MgfNwFge+Dhe9MYfGponVTGBbQ+y32tFl/IBsJftSu0Jy7PuZO3rBaaBltr40zVnz5nlZmXfW7caaWFA==}
+    peerDependencies:
+      '@vite-pwa/assets-generator': ^0.2.6
+      astro: ^1.6.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
+      vite-plugin-pwa: '>=0.20.5 <1'
+    peerDependenciesMeta:
+      '@vite-pwa/assets-generator':
+        optional: true
 
   '@vitejs/plugin-react@4.3.1':
     resolution: {integrity: sha512-m/V2syj5CuVnaxcUJOQRel/Wr31FFXRFlnOoq1TVtkCxsY5veGMTEmpWHndrhB2U8ScHtCQB1e+4hWYExQc6Lg==}
@@ -5297,6 +5307,11 @@ snapshots:
   '@types/unist@3.0.3': {}
 
   '@ungap/structured-clone@1.2.0': {}
+
+  '@vite-pwa/astro@0.4.3(astro@4.15.8(@types/node@22.5.5)(lightningcss@1.25.1)(rollup@2.79.1)(terser@5.33.0)(typescript@5.6.2))(vite-plugin-pwa@0.20.5(vite@5.4.6(@types/node@22.5.5)(lightningcss@1.25.1)(terser@5.33.0))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.1.0))':
+    dependencies:
+      astro: 4.15.8(@types/node@22.5.5)(lightningcss@1.25.1)(rollup@2.79.1)(terser@5.33.0)(typescript@5.6.2)
+      vite-plugin-pwa: 0.20.5(vite@5.4.6(@types/node@22.5.5)(lightningcss@1.25.1)(terser@5.33.0))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.1.0)
 
   '@vitejs/plugin-react@4.3.1(vite@5.4.6(@types/node@22.5.5)(lightningcss@1.25.1)(terser@5.33.0))':
     dependencies:

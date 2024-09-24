@@ -1,5 +1,5 @@
 import type { Props } from 'astro-seo';
-import type { ManifestOptions } from 'vite-plugin-pwa';
+import type { PwaOptions } from '@vite-pwa/astro';
 
 export const DOMAIN = 'https://arthur.run';
 export const BASE_PATH = process.env.BASE_URL || 'risk-dice';
@@ -27,6 +27,7 @@ export const SeoProps: Props = {
       { rel: 'icon', type: 'image/png', sizes: '48x48', href: `${URL}/favicon-48.png` },
       { rel: 'icon', type: 'image/png', sizes: '32x32', href: `${URL}/favicon-32.png` },
       { rel: 'icon', type: 'image/png', sizes: '16x16', href: `${URL}/favicon-16.png` },
+      { rel: 'manifest', href: `${URL}/manifest.webmanifest` }
     ],
     meta: [
       { name: 'msapplication-TileColor', content: '#EF7244' },
@@ -38,7 +39,7 @@ export const SeoProps: Props = {
 /**
  * Defines the configuration for PWA webmanifest.
  */
-export const manifest: Partial<ManifestOptions> = {
+export const manifest = {
   name: 'Risk Dice Roller',
   short_name: 'Risk Roller',
   description:

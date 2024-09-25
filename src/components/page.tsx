@@ -66,17 +66,17 @@ export default function Page() {
       <SideComponent side={Sides.Defense} direction={Direction.Down} />
 
       {!pwa.canInstall && !pwa.isInstalled && pwa.userChoice !== UserChoice.DISMISSED && (
-        <div className='absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-0 p-2 text-red-800  items-center text-center'>
+        <div className='absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-0 p-2 text-red-800 text-md items-center'>
           <button type='button' className='flex gap-1 hover:underline hover:cursor-pointer' onClick={pwa.installPrompt}>
-            Download to play <span className='font-semibold'>offline</span> !
+            Click here to download and play <span className='font-semibold'>offline</span>!
           </button>
         </div>
       )}
 
-      <div className='absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 p-2 text-yellow-800 text-center'>
+      <div className='absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 p-2 text-yellow-800'>
         <div className='font-semibold '>
           Made with ❤️ by{' '}
-          <a href='https://arthur.place/' className='hover:underline hover:cursor-pointer'>
+          <a href='https://arthur.place?' className='hover:underline hover:cursor-pointer' >
             Arthur Fiorette
           </a>
         </div>

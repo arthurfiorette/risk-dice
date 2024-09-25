@@ -40,12 +40,9 @@ export default defineConfig({
         // This removes an errant console.log message from showing up.
         navigateFallback: null
       },
-      devOptions: {
-        enabled: true
-      },
       pwaAssets: {
         preset: 'minimal-2023',
-        images: 'public/favicon.svg'
+        images: './public/favicon.svg'
       }
     })
   ]

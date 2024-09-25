@@ -1,17 +1,22 @@
 import { useEffect, useState } from 'react';
-import { PiArrowCounterClockwise } from 'react-icons/pi';
+import { PiArrowCounterClockwise, PiDownloadDuotone } from 'react-icons/pi';
 import { useGame } from '../store/game';
 import { cn } from '../utils/cn';
 import { getActionMessage, getColorButton, getPlayDelay } from '../utils/messages';
 import { Direction, GameState, Sides } from '../utils/types';
 import { DiceHistory } from './dice';
 import { SideComponent } from './side';
+import { usePwa, UserChoice } from '../hooks/pwa';
 
 export default function Page() {
   const play = useGame((state) => state.play);
   const state = useGame((state) => state.state);
   const reset = useGame((state) => state.reset);
   const rounds = useGame((state) => state.nextRoundCount)();
+
+  const pwa = usePwa();
+
+  // console.log(pwa.installPrompt().then(console.log, console.error));
 
   const [disabled, setDisabled] = useState(false);
 
@@ -60,11 +65,21 @@ export default function Page() {
 
       <SideComponent side={Sides.Defense} direction={Direction.Down} />
 
-      <div className='absolute bottom-0 left-full -translate-x-full -translate-y-0 font-semibold p-2 w-full text-yellow-900'>
-        Made by{' '}
-        <a href='https://arthur.place/' className='hover:underline'>
-          Arthur Fiorette
-        </a>
+      {!pwa.canInstall && !pwa.isInstalled && pwa.userChoice !== UserChoice.DISMISSED && (
+        <div className='absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-0 p-2 text-red-800  items-center text-center'>
+          <button type='button' className='flex gap-1 hover:underline hover:cursor-pointer' onClick={pwa.installPrompt}>
+            Download to play <span className='font-semibold'>offline</span> !
+          </button>
+        </div>
+      )}
+
+      <div className='absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 p-2 text-yellow-800 text-center'>
+        <div className='font-semibold '>
+          Made with ❤️ by{' '}
+          <a href='https://arthur.place/' className='hover:underline hover:cursor-pointer'>
+            Arthur Fiorette
+          </a>
+        </div>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ export const SeoProps: Props = {
     'A simple dice roller for the board game Risk. Roll the dice and see the results of your attack or defense.',
   openGraph: {
     basic: {
-      image: `${PUBLIC_URL}/android-chrome-512.png`,
+      image: `${PUBLIC_URL}/pwa-512x512.png`,
       type: 'website',
       title: 'Risk Dice Roller'
     }

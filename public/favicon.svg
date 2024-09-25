@@ -5,8 +5,8 @@
   height="250px"
   viewBox="0 0 24 24"
   stroke-width="1.03"
-  stroke="rgba(239, 114, 68, 1)"
-  fill="rgba(234, 179, 8, 1)"
+  stroke="rgb(239, 114, 68)"
+  fill="rgb(234, 179, 8)"
   stroke-linecap="round"
   stroke-linejoin="round">
   <g transform="translate(-0.72, -0.72) scale(1.06)">

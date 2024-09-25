@@ -1,0 +1,8 @@
+---
+import { pwaInfo } from 'virtual:pwa-info';
+
+---
+
+<script src="../utils/pwa.ts"></script>
+
+{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}

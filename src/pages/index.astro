@@ -2,6 +2,7 @@
 import { SEO } from 'astro-seo';
 import Page from '../components/page.tsx';
 import { SeoProps } from '../utils/seo';
+import Pwa from '../components/pwa.astro';
 ---
 
 <html lang='en'>
@@ -9,6 +10,7 @@ import { SeoProps } from '../utils/seo';
 		<meta charset='utf-8' />
 		<meta name='viewport' content='width=device-width' />
 		<title>Risk Dice Roller</title>
+		<Pwa />
 		<SEO {...SeoProps} />
 	</head>
 

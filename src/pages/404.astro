@@ -1,12 +1,12 @@
 ---
-import {URL} from '../utils/seo'
+import { Url } from "../utils/url";
 ---
 
 <!doctype html>
 <meta charset="utf-8" />
-<title>Redirecting to {URL}</title>
+<title>Redirecting to {Url}</title>
 <meta
   http-equiv="refresh"
-  content={`0; URL=${URL}`}
+  content={`0; URL=${Url}`}
 />
-<link rel="canonical" href={URL} />
+<link rel="canonical" href={Url} />

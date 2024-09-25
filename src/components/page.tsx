@@ -13,11 +13,7 @@ export default function Page() {
   const state = useGame((state) => state.state);
   const reset = useGame((state) => state.reset);
   const rounds = useGame((state) => state.nextRoundCount)();
-
   const pwa = usePwa();
-
-  // console.log(pwa.installPrompt().then(console.log, console.error));
-
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {

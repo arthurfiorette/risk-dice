@@ -32,8 +32,7 @@ export const usePwa = (): IusePwa => {
   const [isInstalled, setInstalled] = useState<boolean>(false);
   const [isOffline, setOffline] = useState<boolean>(false);
   const [userChoice, setUserChoice] = useState<IusePwa['userChoice']>('unknow');
-  const deferredPrompt =
-    useRef() as React.MutableRefObject<BeforeInstallPromptEvent | null>;
+  const deferredPrompt = useRef() as React.MutableRefObject<BeforeInstallPromptEvent | null>;
 
   const handleInstallEvent = useCallback(() => setInstalled(true), []);
 
@@ -56,8 +55,7 @@ export const usePwa = (): IusePwa => {
     }
 
     window.addEventListener('beforeinstallprompt', handleBeforePromptEvent);
-    return () =>
-      window.removeEventListener('beforeinstallprompt', handleBeforePromptEvent);
+    return () => window.removeEventListener('beforeinstallprompt', handleBeforePromptEvent);
   }, [handleBeforePromptEvent]);
 
   useEffect(() => {
@@ -114,4 +112,3 @@ export const usePwa = (): IusePwa => {
     userChoice
   };
 };
-

@@ -65,7 +65,7 @@ export default function Page() {
 
       <SideComponent side={Sides.Defense} direction={Direction.Down} />
 
-      {!pwa.canInstall && !pwa.isInstalled && pwa.userChoice !== UserChoice.DISMISSED && (
+      {pwa.canInstall && !pwa.isInstalled && pwa.userChoice !== UserChoice.DISMISSED && (
         <div className='absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-0 p-2 text-red-800 text-md items-center'>
           <button
             type='button'

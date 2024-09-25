@@ -43,7 +43,8 @@ jobs:
         run: pnpm build
         env:
           NODE_ENV: production
-          BASE_URL: ${{ github.event.repository.name }}
+          BASE_PATH: ${{ github.event.repository.name }}
+          BASE_URL: arthur.run
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2

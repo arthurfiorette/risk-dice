@@ -1,12 +1,12 @@
 ---
-import { Url } from "../utils/url";
+import { PUBLIC_URL } from "../utils/url";
 ---
 
 <!doctype html>
 <meta charset="utf-8" />
-<title>Redirecting to {Url}</title>
+<title>Redirecting to {PUBLIC_URL}</title>
 <meta
   http-equiv="refresh"
-  content={`0; URL=${Url}`}
+  content={`0; URL=${PUBLIC_URL}`}
 />
-<link rel="canonical" href={Url} />
+<link rel="canonical" href={PUBLIC_URL} />

@@ -5,12 +5,12 @@ import sitemap from '@astrojs/sitemap';
 import compress from 'astro-compress';
 import robotsTxt from 'astro-robots-txt';
 import AstroPWA from '@vite-pwa/astro';
-import { BasePath, Url } from './src/utils/url';
+import { BasePath, PUBLIC_URL } from './src/utils/url';
 
 // https://astro.build/config
 export default defineConfig({
-  site: Url,
-  base: BasePath,
+  site: PUBLIC_URL.toString(),
+  base: `${PUBLIC_URL.pathname}/`,
   output: 'static',
   build: {
     format: 'file'

@@ -6,6 +6,7 @@ import { cn } from '../utils/cn';
 import { getActionMessage, getColorButton, getPlayDelay } from '../utils/messages';
 import { Direction, GameState, Sides } from '../utils/types';
 import { DiceHistory } from './dice';
+import { useWakeLock } from '../utils/lock';
 import { SideComponent } from './side';
 
 export default function Page() {
@@ -15,6 +16,13 @@ export default function Page() {
   const rounds = useGame((state) => state.nextRoundCount)();
   const pwa = usePwa();
   const [disabled, setDisabled] = useState(false);
+  const wakeLock = useWakeLock();
+
+  useEffect(() => {
+    if (wakeLock.isSupported) {
+      wakeLock.request('screen');
+    }
+  }, []);
 
   useEffect(() => {
     setDisabled(true);

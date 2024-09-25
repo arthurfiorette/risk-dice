@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { PiArrowCounterClockwise, PiDownloadDuotone } from 'react-icons/pi';
+import { PiArrowCounterClockwise } from 'react-icons/pi';
+import { UserChoice, usePwa } from '../hooks/pwa';
 import { useGame } from '../store/game';
 import { cn } from '../utils/cn';
 import { getActionMessage, getColorButton, getPlayDelay } from '../utils/messages';
 import { Direction, GameState, Sides } from '../utils/types';
 import { DiceHistory } from './dice';
 import { SideComponent } from './side';
-import { usePwa, UserChoice } from '../hooks/pwa';
 
 export default function Page() {
   const play = useGame((state) => state.play);

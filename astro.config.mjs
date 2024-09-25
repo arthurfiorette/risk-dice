@@ -30,7 +30,7 @@ export default defineConfig({
           'A simple dice roller for the board game Risk. Roll the dice and see the results of your attack or defense.',
         theme_color: '#eab308',
         background_color: '#ef4444',
-        display: 'minimal-ui'
+        display: 'fullscreen'
       },
       includeAssets: ['favicon.svg'],
       workbox: {

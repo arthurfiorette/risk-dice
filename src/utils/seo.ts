@@ -18,6 +18,10 @@ export const SeoProps: Props = {
   },
   extend: {
     link: pwaAssetsHead.links,
-    meta: [{ name: 'msapplication-TileColor', content: '#EF7244' }, pwaAssetsHead.themeColor!]
+    meta: [
+      { name: 'msapplication-TileColor', content: '#EF7244' },
+      { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+      pwaAssetsHead.themeColor!
+    ]
   }
 };

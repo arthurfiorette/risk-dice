@@ -75,7 +75,7 @@ export default function Page() {
         </div>
       )}
 
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 p-2 text-yellow-800">
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-0 p-2 text-yellow-800 text-sm">
         <div className="font-semibold ">
           Made with ❤️ by{' '}
           <a href="https://arthur.place" className="hover:underline hover:cursor-pointer">

@@ -44,7 +44,7 @@ jobs:
         env:
           NODE_ENV: production
           BASE_PATH: ${{ github.event.repository.name }}
-          BASE_URL: arthur.run
+          BASE_URL: https://arthur.run
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2

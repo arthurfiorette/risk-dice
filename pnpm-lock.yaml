@@ -15,7 +15,7 @@ importers:
         specifier: 3.6.2
         version: 3.6.2(@types/react-dom@18.3.0)(@types/react@18.3.9)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.6(@types/node@22.7.0)(lightningcss@1.25.1)(terser@5.33.0))
       '@astrojs/sitemap':
-        specifier: ^3.1.6
+        specifier: 3.1.6
         version: 3.1.6
       '@astrojs/tailwind':
         specifier: 5.1.1
@@ -24,7 +24,7 @@ importers:
         specifier: 1.9.2
         version: 1.9.2
       '@types/node':
-        specifier: ^22.7.0
+        specifier: 22.7.0
         version: 22.7.0
       '@types/react':
         specifier: 18.3.9
@@ -33,25 +33,25 @@ importers:
         specifier: 18.3.0
         version: 18.3.0
       '@vite-pwa/assets-generator':
-        specifier: ^0.2.6
+        specifier: 0.2.6
         version: 0.2.6
       '@vite-pwa/astro':
-        specifier: ^0.4.3
+        specifier: 0.4.3
         version: 0.4.3(@vite-pwa/assets-generator@0.2.6)(astro@4.15.9(@types/node@22.7.0)(lightningcss@1.25.1)(rollup@2.79.1)(terser@5.33.0)(typescript@5.6.2))(vite-plugin-pwa@0.20.5(@vite-pwa/assets-generator@0.2.6)(vite@5.4.6(@types/node@22.7.0)(lightningcss@1.25.1)(terser@5.33.0))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.1.0))
       astro:
         specifier: 4.15.9
         version: 4.15.9(@types/node@22.7.0)(lightningcss@1.25.1)(rollup@2.79.1)(terser@5.33.0)(typescript@5.6.2)
       astro-compress:
-        specifier: ^2.3.1
+        specifier: 2.3.1
         version: 2.3.1(@types/node@22.7.0)(rollup@2.79.1)(typescript@5.6.2)
       astro-robots-txt:
-        specifier: ^1.0.0
+        specifier: 1.0.0
         version: 1.0.0
       astro-seo:
-        specifier: ^0.8.4
+        specifier: 0.8.4
         version: 0.8.4(typescript@5.6.2)
       clsx:
-        specifier: ^2.1.1
+        specifier: 2.1.1
         version: 2.1.1
       react:
         specifier: 18.3.1
@@ -60,19 +60,19 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       react-icons:
-        specifier: ^5.3.0
+        specifier: 5.3.0
         version: 5.3.0(react@18.3.1)
       sharp:
-        specifier: ^0.33.5
+        specifier: 0.33.5
         version: 0.33.5
       sharp-ico:
-        specifier: ^0.1.5
+        specifier: 0.1.5
         version: 0.1.5
       tailwind-merge:
-        specifier: ^2.5.2
+        specifier: 2.5.2
         version: 2.5.2
       tailwind-scrollbar:
-        specifier: ^3.1.0
+        specifier: 3.1.0
         version: 3.1.0(tailwindcss@3.4.13)
       tailwindcss:
         specifier: 3.4.13
@@ -81,10 +81,10 @@ importers:
         specifier: 5.6.2
         version: 5.6.2
       vite-plugin-pwa:
-        specifier: ^0.20.5
+        specifier: 0.20.5
         version: 0.20.5(@vite-pwa/assets-generator@0.2.6)(vite@5.4.6(@types/node@22.7.0)(lightningcss@1.25.1)(terser@5.33.0))(workbox-build@7.1.1(@types/babel__core@7.20.5))(workbox-window@7.1.0)
       workbox-window:
-        specifier: ^7.1.0
+        specifier: 7.1.0
         version: 7.1.0
       zustand:
         specifier: 5.0.0-rc.2

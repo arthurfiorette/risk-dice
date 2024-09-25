@@ -13,7 +13,7 @@ export default defineConfig({
   base: BasePath,
   output: 'static',
   build: {
-    format: 'file',
+    format: 'file'
   },
   integrations: [
     react(),
@@ -44,7 +44,8 @@ export default defineConfig({
         enabled: true
       },
       pwaAssets: {
-        config: true
+        preset: 'minimal-2023',
+        images: 'public/favicon.svg'
       }
     })
   ]

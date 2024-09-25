@@ -11,7 +11,6 @@ import { pwaInfo } from 'virtual:pwa-info';
 		<meta name='viewport' content='width=device-width' />
 		<title>Risk Dice Roller</title>
 		<SEO {...SeoProps} />
-    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
 	</head>
 
 	<body>

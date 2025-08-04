@@ -57,7 +57,7 @@ export function SideComponent({ side, direction }: SideProps) {
           disabled={state !== GameState.Waiting}
           min={0}
           placeholder="?"
-          onChange={(e) => setTroops(side, Number.parseInt(e.target.value))}
+          onChange={(e) => setTroops(side, Number.parseInt(e.target.value) || 0)}
           className={cn(
             // remove arrows
             '[-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none',
